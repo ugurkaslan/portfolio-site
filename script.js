@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // ==============================
 // NAVBAR: scroll shadow + active link
 // ==============================
@@ -95,6 +94,3 @@ form.addEventListener('submit', (e) => {
 });
 
 console.log('ugurkaslan.com loaded ✓');
-=======
-console.log("site loaded")
->>>>>>> 516c572064ee459af4d23f8d26905523b5645c3a

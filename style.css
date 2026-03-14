@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* ==============================
    CSS VARIABLES & RESET
 ============================== */
@@ -869,65 +868,3 @@ footer {
   .tl-header { flex-direction: column; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
-=======
-body {
-  background-color: #0A192F;  /* Dark navy blue */
-  color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile-pic {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;  /* Makes it circular */
-  object-fit: cover;    /* Ensures image fills the circle nicely */
-  margin-bottom: 30px;
-  border: 3px solid white;
-}
-
-.poem {
-  max-width: 600px;
-  padding: 20px;
-}
-
-.title-box {
-  background-color: #1E3A5F;  /* Slightly lighter navy blue */
-  padding: 20px 30px;
-  border-radius: 10px;         /* Optional: rounded corners */
-  margin-bottom: 40px;
-  display: inline-block;       /* Makes the background fit the content */
-  width: auto;                 /* Ensures it wraps nicely */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Optional: subtle shadow */
-}
-
-.poem h2 {
-  font-size: 2.5em;        /* Larger title */
-  font-weight: normal;
-  letter-spacing: 3px;
-  opacity: 0.9;
-  margin: 0;             /* Remove default margins since the box handles spacing */
-}
-
-.poem p {
-  font-size: 1.3em;
-  line-height: 1.8;
-  font-style: italic;
-  margin-bottom: 30px;   /* Space before author */
-}
-
-.author {
-  font-size: 0.9em;       /* Smaller letters */
-  font-style: normal;     /* Not italic like the poem */
-  opacity: 0.7;           /* Slightly faded */
-  letter-spacing: 1px;
-  margin-top: 20px;
-}
->>>>>>> 516c572064ee459af4d23f8d26905523b5645c3a
