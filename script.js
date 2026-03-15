@@ -58,12 +58,13 @@ const observer = new IntersectionObserver(
 revealEls.forEach(el => observer.observe(el));
 
 // ==============================
-// CONTACT FORM (mailto fallback)
+// CONTACT FORM (Web3Forms)
 // ==============================
 const form = document.getElementById('contactForm');
 const notice = document.getElementById('formNotice');
+const submitBtn = form.querySelector('.form-submit');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const name    = document.getElementById('name').value.trim();
@@ -71,26 +72,50 @@ form.addEventListener('submit', (e) => {
   const subject = document.getElementById('subject').value.trim();
   const message = document.getElementById('message').value.trim();
 
+  // basic validation
   if (!name || !email || !message) {
     notice.textContent = 'Please fill in your name, email and message.';
     notice.className = 'form-notice error';
     return;
   }
 
-  const mailtoSubject = encodeURIComponent(subject || `Message from ${name}`);
-  const mailtoBody    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-  const mailtoLink    = `mailto:ugurkaplan0101@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+  // loading state
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+  notice.textContent = '';
+  notice.className = 'form-notice';
 
-  window.location.href = mailtoLink;
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: '753ffb66-1bcf-4c1c-8e8a-c798a8ff41b3',
+        name,
+        email,
+        subject: subject || `Portfolio message from ${name}`,
+        message,
+        botcheck: ''  // honeypot spam protection
+      })
+    });
 
-  notice.textContent = 'Opening your mail client…';
-  notice.className = 'form-notice success';
+    const data = await response.json();
 
-  setTimeout(() => {
-    form.reset();
-    notice.textContent = '';
-    notice.className = 'form-notice';
-  }, 4000);
+    if (data.success) {
+      notice.textContent = '✓ Message sent! I\'ll get back to you soon.';
+      notice.className = 'form-notice success';
+      form.reset();
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (err) {
+    notice.textContent = 'Something went wrong. Please try emailing me directly.';
+    notice.className = 'form-notice error';
+    console.error('Web3Forms error:', err);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+  }
 });
 
 console.log('ugurkaslan.com loaded ✓');
